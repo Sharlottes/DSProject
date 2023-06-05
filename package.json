@@ -1,10 +1,6 @@
 {
     "version": "0.0.0",
-    "private": "Please use 'devs add npm' to make this a publishable package",
-    "dependencies": {},
-    "devDependencies": {
-        "@devicescript/cli": "latest"
-    },
+    "private": "true",
     "scripts": {
         "setup": "devicescript build --quiet",
         "postinstall": "devicescript build",
@@ -15,5 +11,23 @@
         "test:devicescript": "devicescript run src/main.ts --test --test-self-exit",
         "test": "yarn test:devicescript",
         "start": "yarn watch"
-    }
+    },
+    "main": "./src/index.ts",
+    "license": "MIT",
+    "devicescript": {
+        "library": true
+    },
+    "files": [
+        "src/*.ts",
+        "devsconfig.json"
+    ],
+    "keywords": [
+        "devicescript"
+    ],
+    "author": "Sharlotte <seeseafood@naver.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Sharlottes/DSProject.git"
+    },
+    "name": "devicescript-built"
 }

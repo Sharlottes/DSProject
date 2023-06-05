@@ -1,31 +1,22 @@
 import * as ds from "@devicescript/core"
+import "@devicescript/observables"
+import { startLightBulb, startServo } from "@devicescript/servers"
+import { pins } from "@dsboard/adafruit_qt_py_c3"
 
-const screen = new ds.CharacterScreen()
-const clock = new ds.RealTimeClock()
-
-clock.reading.subscribe(async numbers => {
-    console.log(numbers.join(", "))
-    await screen.message.write(wrapString(toDateString(numbers, true), 16))
+const lightBulb = startLightBulb({
+    pin: pins.A1,
 })
 
-const date_of_week_LUT = ["월", "화", "수", "목", "금", "토", "일"]
-function toDateString(
-    numbers: [number, number, number, number, number, number, number],
-    pmam = false
-) {
-    const [year, month, date_of_month, date_of_week, hour, minute, second] =
-        numbers
-    const week = date_of_week_LUT[date_of_week]
-    return `${year}년 ${month}월 ${date_of_month}일 ${week}요일 ${
-        pmam
-            ? hour >= 12
-                ? `오후 ${hour - 12}시`
-                : `오전 ${hour}시`
-            : `${hour}시`
-    } ${minute}분 ${second}초`
-}
-function wrapString(string: string, length: number) {
-    if (string.length <= length) return string
+const servo = startServo({
+    pin: pins.A2,
+})
 
-    return `${string.slice(0, length)}\n${string.slice(length)}`
-}
+setInterval(async () => {
+    await lightBulb.toggle()
+}, 500)
+
+let i = 0
+setInterval(async () => {
+    i++
+    await servo.angle.write((i % 180) - 90)
+}, 1)
