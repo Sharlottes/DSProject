@@ -1,5 +1,6 @@
 {
-    "version": "0.0.0",
+    "name": "dsproject",
+    "version": "0.1.0",
     "private": "true",
     "scripts": {
         "setup": "devicescript build --quiet",
@@ -14,20 +15,7 @@
     },
     "main": "./src/index.ts",
     "license": "MIT",
-    "devicescript": {
-        "library": true
-    },
-    "files": [
-        "src/*.ts",
-        "devsconfig.json"
-    ],
-    "keywords": [
-        "devicescript"
-    ],
-    "author": "Sharlotte <seeseafood@naver.com>",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Sharlottes/DSProject.git"
-    },
-    "name": "devicescript-built"
+    "dependencies": {
+        "@devicescript/cli": "^2.10.7"
+    }
 }
